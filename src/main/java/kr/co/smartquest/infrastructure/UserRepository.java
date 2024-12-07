@@ -1,9 +1,8 @@
 package kr.co.smartquest.infrastructure;
 
-import kr.co.smartquest.domain.EntityNotFoundException;
+import kr.co.smartquest.domain.Exception.EntityNotFoundException;
 import kr.co.smartquest.domain.SmartUserRepository;
-import kr.co.smartquest.domain.User;
-import kr.co.smartquest.presentation.CreateUser.CreateUserRequestDto;
+import kr.co.smartquest.domain.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;

@@ -1,6 +1,6 @@
 package kr.co.smartquest.application;
 
-import kr.co.smartquest.domain.User;
+import kr.co.smartquest.domain.Entity.User;
 import kr.co.smartquest.infrastructure.UserRepository;
 import kr.co.smartquest.presentation.CreateUser.CreateUserRequestDto;
 import kr.co.smartquest.presentation.CreateUser.CreateUserResponseDto;

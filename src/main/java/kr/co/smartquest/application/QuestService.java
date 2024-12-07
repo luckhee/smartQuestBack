@@ -1,6 +1,6 @@
 package kr.co.smartquest.application;
 
-import kr.co.smartquest.domain.Quest;
+import kr.co.smartquest.domain.Entity.Quest;
 
 import kr.co.smartquest.infrastructure.QuestRepository;
 import kr.co.smartquest.presentation.Quest.CreateQuestDto;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class QuestService {

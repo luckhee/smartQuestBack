@@ -1,6 +1,5 @@
 package kr.co.smartquest.application;
 
-import kr.co.smartquest.domain.Login;
 import kr.co.smartquest.infrastructure.UserRepository;
 import kr.co.smartquest.presentation.Login.TryLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;

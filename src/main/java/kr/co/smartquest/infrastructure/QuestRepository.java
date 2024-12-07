@@ -1,6 +1,6 @@
 package kr.co.smartquest.infrastructure;
 
-import kr.co.smartquest.domain.Quest;
+import kr.co.smartquest.domain.Entity.Quest;
 import kr.co.smartquest.domain.SmartQuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

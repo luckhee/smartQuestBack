@@ -1,4 +1,4 @@
-package kr.co.smartquest.domain;
+package kr.co.smartquest.domain.Exception;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException(String message) {

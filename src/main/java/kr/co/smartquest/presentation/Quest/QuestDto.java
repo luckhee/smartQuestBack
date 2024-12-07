@@ -1,6 +1,6 @@
 package kr.co.smartquest.presentation.Quest;
 
-import kr.co.smartquest.domain.Quest;
+import kr.co.smartquest.domain.Entity.Quest;
 
 import java.time.LocalDateTime;
 

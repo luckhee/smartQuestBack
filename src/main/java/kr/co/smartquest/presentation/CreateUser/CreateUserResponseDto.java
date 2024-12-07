@@ -1,6 +1,6 @@
 package kr.co.smartquest.presentation.CreateUser;
 
-import kr.co.smartquest.domain.User;
+import kr.co.smartquest.domain.Entity.User;
 
 public class CreateUserResponseDto {
     private String id;
