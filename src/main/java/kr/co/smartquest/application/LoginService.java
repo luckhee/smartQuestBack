@@ -1,26 +1,41 @@
 package kr.co.smartquest.application;
 
-import kr.co.smartquest.infrastructure.UserRepository;
+import kr.co.smartquest.domain.Entity.Children;
+import kr.co.smartquest.domain.Entity.Login;
+
+import kr.co.smartquest.infrastructure.NewChildRepository;
 import kr.co.smartquest.presentation.Login.TryLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginService {
+public class LoginService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private final NewChildRepository newChildRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public LoginService(NewChildRepository newChildRepository) {
+        this.newChildRepository = newChildRepository;
+    }
+
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+
+    @Override
+    public Children loadUserByUsername(String email) {
+        return newChildRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException((email)));
+    }
 
 
 
-    public Boolean login(TryLoginDto tryLoginDto) {
-        String storedPassword = userRepository.findPasswordById(tryLoginDto.getId());
-
-        return passwordEncoder.matches(tryLoginDto.getPassword(), storedPassword);
+//    public Boolean login(TryLoginDto tryLoginDto) {
+//        String storedPassword = userRepository.findPasswordById(tryLoginDto.getId());
+//
+////        return passwordEncoder.matches(tryLoginDto.getPassword(), storedPassword);
 //        Boolean result = false;
 //        String id = tryLoginDto.getId();
 //        String password = tryLoginDto.getPassword();
@@ -35,6 +50,6 @@ public class LoginService {
 //            return result = true;
 //        }
 //        return result;
-        }
+//        }
     }
 

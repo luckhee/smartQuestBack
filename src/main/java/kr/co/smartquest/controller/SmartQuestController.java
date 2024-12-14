@@ -10,10 +10,7 @@ import kr.co.smartquest.presentation.Quest.CreateQuestDto;
 import kr.co.smartquest.presentation.Quest.QuestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,28 +30,39 @@ public class SmartQuestController {
         this.questService = questService;
     }
 
-    //회원가입 API
-    @RequestMapping(value= "/smartquestUserInsert", method = RequestMethod.POST)
-    public void createUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
-        CreateUserResponseDto createUserResponseDto = enterUserService.saveUser(createUserRequestDto);
+    //회원가입 API 완료.
+    @RequestMapping(value= "/smartquestParentInsert", method = RequestMethod.POST)
+    public ResponseEntity<?> createParentUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
+//        CreateUserResponseDto createUserResponseDto = enterUserService.saveUser(createUserRequestDto);
+        enterUserService.saveUser(createUserRequestDto);
 
+        return ResponseEntity.ok("저장완");
+    }
+    // 자식 회원가입
+    @RequestMapping(value= "/smartquestChildInsert", method = RequestMethod.POST)
+    public ResponseEntity<?> createChildUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
+//        CreateUserResponseDto createUserResponseDto = enterUserService.saveUser(createUserRequestDto);
+        enterUserService.childSaveUser(createUserRequestDto);
+
+        return ResponseEntity.ok("저장완");
     }
 
     //로그인 API result가 true면 리턴타입을 ResponseEntity<BatchQuest>로 간다던지
     @RequestMapping(value = "/smartquestLogin", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody TryLoginDto tryLoginDto) {
-        Boolean result = loginService.login(tryLoginDto);
+        String email = tryLoginDto.getId();
+        loginService.loadUserByUsername(email);
 
-        return ok(result);
+        return ResponseEntity.ok("회원가입 완료");
     }
 
-    //퀘스트 추가 API
-    @RequestMapping(value = "/smartquestAdd", method = RequestMethod.POST)
+    //퀘스트 추가 API 완료.
+    @PostMapping("/smartquestAdd")
     public ResponseEntity<String> addQuest(@RequestBody CreateQuestDto createQuestDto) {
         questService.addQuest(createQuestDto);
-
         return ResponseEntity.ok("success");
     }
+
 
     //퀘스트 확인 API
     @RequestMapping(value="/smartquestAdd", method = RequestMethod.GET)

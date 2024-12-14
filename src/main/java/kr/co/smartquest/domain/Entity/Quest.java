@@ -1,6 +1,7 @@
 package kr.co.smartquest.domain.Entity;
 
 import jakarta.persistence.*;
+import kr.co.smartquest.presentation.Quest.CreateQuestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,17 +30,19 @@ public class Quest {
 //
 //    public Quest() {}
 //
-//    public Quest(String title, String description, Integer reward) {
-//        this.title = title;
-//        this.description = description;
-//        this.reward = reward;
-//    }
+    public Quest(String title, String description, Integer reward) {
+        this.title = title;
+        this.description = description;
+        this.reward = reward;
+    }
 //
-//    public Quest(CreateQuestDto createQuestDto) {
-//        this.title = createQuestDto.getTitle();
-//        this.description = createQuestDto.getDescription();
-//        this.reward = createQuestDto.getReward();
-//    }
+    public Quest(CreateQuestDto createQuestDto, Parents parents, Children child) {
+        this.parent = parents;
+        this.title = createQuestDto.getTitle();
+        this.description = createQuestDto.getDescription();
+        this.reward = createQuestDto.getReward();
+        this.child_id = child;
+    }
 //
 //    public Integer getReward() {
 //        return reward;
@@ -88,11 +91,11 @@ public class Quest {
 
     @ManyToOne
     @JoinColumn(name = "parents_id", nullable = false)
-    private Parents parent_id;
+    private Parents parent;
 
     @ManyToOne
     @JoinColumn(name = "child_id", nullable = false)
-    private Parents child_id;
+    private Children child_id;
 
     @Column
     private String title;

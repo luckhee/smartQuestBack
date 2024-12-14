@@ -32,7 +32,7 @@ public class QuestRepository implements SmartQuestRepository {
                 namedParameters, keyHolder);
 
         Long id = keyHolder.getKey().longValue();
-        quest.setId(id);
+//        quest.setId(id);
     }
 
     @Override

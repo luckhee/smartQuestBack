@@ -42,10 +42,10 @@ public class QuestDto {
     public QuestDto() {}
 
     public QuestDto(Quest quest) {
-        this.id = quest.getId();
+//        this.id = quest.getId();
         this.title = quest.getTitle();
         this.description = quest.getDescription();
         this.reward = quest.getReward();
-        this.createdAt = quest.getCreatedAt();
+//        this.createdAt = quest.getCreatedAt();
     }
 }
