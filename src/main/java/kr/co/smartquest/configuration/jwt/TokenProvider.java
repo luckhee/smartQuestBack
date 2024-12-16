@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.SignatureAlgorithm;
 import kr.co.smartquest.domain.Entity.Children;
+import kr.co.smartquest.domain.Entity.Parents;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,12 @@ public class TokenProvider {
 
     private final JwtProperties jwtProperties;
 
+    public String ParentgenerateToken(Parents parents, Duration expiredAt) {
+        Date now = new Date();
+
+        return parentmakeToken(new Date(now.getTime() + expiredAt.toMillis()), parents);
+    }
+
     public String generateToken(Children children, Duration expiredAt) {
         Date now = new Date();
 
@@ -38,6 +45,20 @@ public class TokenProvider {
                 .setExpiration(expiry) //내용
                 .setSubject(children.getEmail()) // 내용 - 유저의 이메일
                 .claim("id",children.getChild_id())
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey()) //서명 - 비밀값과 함께 해시값을 HS256방식으로 암호화
+                .compact();
+    }
+
+    private String parentmakeToken(Date expiry, Parents parents) {
+        Date now = new Date();
+
+        return Jwts.builder()
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE) //헤더
+                .setIssuer(jwtProperties.getIssue()) //내용
+                .setIssuedAt(now) //내용 (현재 시간)
+                .setExpiration(expiry) //내용
+                .setSubject(parents.getEmail()) // 내용 - 유저의 이메일
+                .claim("id",parents.getParentsId())
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey()) //서명 - 비밀값과 함께 해시값을 HS256방식으로 암호화
                 .compact();
     }

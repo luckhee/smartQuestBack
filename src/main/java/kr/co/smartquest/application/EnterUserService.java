@@ -50,6 +50,16 @@ public class EnterUserService {
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .build());
     }
+
+    public Children findById(long id) {
+        return newChildRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
+
+    public Parents findParentid(long id) {
+        return newParentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
